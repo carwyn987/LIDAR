@@ -38,6 +38,10 @@ P/M: 80-VLP-16-A
  - The interface box mainly prevents against overvoltage and reverse voltage. It as a "blade fuse" and a "TVS diode".
  - T568B Straight Through Ethernet Cable Adapter
 
+Visible Components
+ - 7805BG RRJ30
+ - MCC 5KP3 (diode?)
+
 
 # Factoids
  - There is a shield/nc(?) wire that (1) protects against EMI, and potentially (2) serves as overcurrent protection (electromagnetic compatibility protection).
