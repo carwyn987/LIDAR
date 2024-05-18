@@ -16,3 +16,5 @@ I bought a non-working LIDAR sensor to gain experience working with point clouds
  - Ethernet is not recognized, having trouble connecting (classic System76 antics). Got a USB-Ethernet adapter.
  - Got VeloView (ParaView) working, and nothing is broken!
 
+https://github.com/carwyn987/LIDAR/assets/28845732/99fb23b3-7f23-4ddc-b7ca-74ee7a0ffb69
+
