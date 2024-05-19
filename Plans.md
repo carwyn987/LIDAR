@@ -9,4 +9,5 @@
     - Laser goggles specific to blocking 905nm wavelength, just in case disassembly is required
     - Ethernet cable
 2. Get a new 3 A automotive blade fuse (there is not one here).
-3. Install bmon to verify ethernet communication.
+3. ~~Install bmon to verify ethernet communication.~~ Wasn't necessary, just used tcpdump
+4. Learn basics of ROS and see if I can set it up in that environment.
