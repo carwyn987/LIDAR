@@ -12,3 +12,6 @@ sudo tcpdump -i ethernet_interface_name -n -vv -s 0 -c 20000 -W 20000 -w throw.p
 
 https://www.practicalnetworking.net/stand-alone/ethernet-wiring/
 
+# Setup with ROS & Velodyne VLP16
+
+http://wiki.ros.org/velodyne/Tutorials/Getting%20Started%20with%20the%20Velodyne%20VLP16

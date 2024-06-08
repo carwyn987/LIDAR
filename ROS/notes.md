@@ -13,7 +13,7 @@ Running Humble Hawksbill (```echo $ROS_DISTRO```)
 
 # Basic Concepts
 
-![Visualization Prompt](Nodes-TopicandService.gif)
+![Visualization Prompt](media/Nodes-TopicandService.gif)
 
 ^ From tutorial in documentation listed.
 
@@ -58,3 +58,19 @@ Running Humble Hawksbill (```echo $ROS_DISTRO```)
  - If plugins fail to load, run ```rqt --force-discover```
  - To see the current Node/Topic/Connections graph, run ```rqt_graph``` or ```rqt``` and selecting Plugins > Introspection > Node Graph
   - Note: use the refresh button and you can see cmdline invocations (in progress) graphically as nodes.
+
+
+# Drivers:
+
+http://wiki.ros.org/Drivers/Tutorials 
+http://wiki.ros.org/velodyne 
+https://github.com/ros-drivers/velodyne/tree/ros2 
+
+sudo apt-get install ros-humble-velodyne
+sudo ifconfig enx3c18a0432566 169.254.133.69
+
+
+USB Ethernet
+Set MAC address in Identity + Permenent + automatic
+IPv4 link-local only
+IPv6 disabled
