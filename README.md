@@ -29,3 +29,10 @@ https://github.com/carwyn987/LIDAR/assets/28845732/99fb23b3-7f23-4ddc-b7ca-74ee7
 05/18/24
 
  - Learning basics of ROS
+
+...
+
+06/08/24
+
+ - VM failed to correctly access ethernet port. Repartitioned disk + installed Ubuntu 20.04 for use with ROS 1.
+ - 
