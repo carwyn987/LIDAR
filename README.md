@@ -35,4 +35,9 @@ https://github.com/carwyn987/LIDAR/assets/28845732/99fb23b3-7f23-4ddc-b7ca-74ee7
 06/08/24
 
  - VM failed to correctly access ethernet port. Repartitioned disk + installed Ubuntu 20.04 for use with ROS 1.
- - 
+ - A ton of issues getting ROS + velodyne drivers + Ubuntu + System76 working in harmony.
+
+06/09/24
+
+ - Finally got ROS2 Humble + System76 + Ubuntu 22.04 + Python10 working!
+ - Following tutorials to familiarize with ROS2
