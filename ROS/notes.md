@@ -1,5 +1,8 @@
-From https://docs.ros.org/en/humble/Tutorials.html 
 Running Humble Hawksbill (```echo $ROS_DISTRO```)
+
+# Tutorials:
+ - https://www.youtube.com/watch?v=B-GDnDd-u7g&list=PLC-SsBhVny0UA3xO-B0jZboxCbSrs-Sd0
+ - https://docs.ros.org/en/humble/Tutorials.html 
 
 # Configuration
 
@@ -7,6 +10,12 @@ Running Humble Hawksbill (```echo $ROS_DISTRO```)
  - Source setup file: ```source /opt/ros/humble/setup.bash```
  - Set domain id: ```export ROS_DOMAIN_ID=0```
  - Limit communication to localhost: ```export ROS_LOCALHOST_ONLY=1```
+
+### Setting up a workspace
+```
+. install/setup.bash
+```
+. = source
 
 ### Debugging
  - Print environment variables: ```printenv | grep -i ROS```
@@ -46,6 +55,25 @@ Running Humble Hawksbill (```echo $ROS_DISTRO```)
   - Note: This also seems to publish repeatedly unless the ```--once``` flag is used. Alternatively a ```--rate``` in Hz can be specified.
   - If a timestamp is needed, use ```auto``` (in the case of a header like ```std_msgs/msg/Header```) or ```now``` (in the case of a field such as ```builtin_interfaces/msg/Time```) in the YAML args.
  - ```ros2 topic hz <topic_name>``` can be used to get statistics about the time and frequency of publishing.
+
+To get a list of message types:
+```
+ros2 interface show [TAB COMPLETE]
+```
+and these can be imported to python by a line like:
+```
+from geometry_msgs.msg import Quaternion
+```
+
+If I publish on a node, I can listen to it from another terminal with:
+```
+ros2 topic echo /my_first_publisher
+```
+
+Here is an example of publishing:
+```
+ros2 topic pub /my_first_subscription geometry_msgs/msg/Quaternion '{x: 1.0, y: 0.2, z: 0.3, w: 0.4}'
+```
 
 ## Tools
 

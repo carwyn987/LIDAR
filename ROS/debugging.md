@@ -34,3 +34,17 @@ pip uninstall em
 pip uninstall empy
 pip install empy==3.3.4
 ```
+
+
+# Errors using gedit and other software after sourcing ROS2 workspace or ROS2:
+
+```
+lookup error: /snap/core20/current/lib/x86_64-linux-gnu/libpthread.so.0: undefined symbol: __libc_pthread_init, version GLIBC_PRIVATE
+```
+
+Is actually an error resulting from vscode setting an environment variable
+
+To solve, run:
+```
+unset GTK_PATH
+```
