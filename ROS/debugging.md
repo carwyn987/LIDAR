@@ -48,3 +48,11 @@ To solve, run:
 ```
 unset GTK_PATH
 ```
+
+[fix](https://github.com/ros2/ros2/issues/1406)
+
+# RCLPY issues
+
+Common with conflicting / non-synchronous python versions (i.e. venvs + anaconda)
+
+[fix](https://github.com/ros2/rclpy/issues/1194)
