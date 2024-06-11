@@ -22,6 +22,6 @@ Notable packages
 
 Notable build and setup tools
  - catkin
- - colcon
+ - colcon - e.g. ```colcon build``` in a package to build executables and ros2 run commands.
  - CMakeList.txt - cmake format makefile
  - ament-python, ament-cpp
