@@ -1,7 +1,7 @@
 """
 Run with:
 
-~/development/venvs/p39/bin/python testing/test_parse_packet.py data/capture.pcap
+~/development/venvs/p39/bin/python testing/test_parse_packet.py data/throw.pcap
 
 
 
@@ -72,71 +72,60 @@ Header:
 
 import argparse
 import dpkt
-
-def parse_pcap_file(file_path):
-    counter = 0
-    ipcounter = 0
-    tcpcounter = 0
-    udpcounter = 0
-
-    with open(file_path, 'rb') as file:
-        pcap = dpkt.pcap.Reader(file)
-
-        for ts, pkt in pcap:
-            counter += 1
-            eth = dpkt.ethernet.Ethernet(pkt)
-
-            # Split packet into hexidecimal numbers
-            hex_pkt = [hex(x) for x in pkt]
-            # print("hex_pkts: ", hex_pkt[:10])
-
-            # find all "ff ee" indeces in hex_pkt
-            ff_ee_indeces = [i for i, x in enumerate(hex_pkt) if x == '0xff' and hex_pkt[i+1] == '0xee']
-
-            # Split list into list of lists based on "ff ee" indeces
-            split_hex_pkt = [hex_pkt[i:j] for i, j in zip(ff_ee_indeces, ff_ee_indeces[1:]+[None])]
-            # print("split_hex_pkt: ", split_hex_pkt[:10])
-
-            # chunk up this data into sections that start with "ff ee" and end just before the next "ff ee"
-            for section in split_hex_pkt:
-                for i,v in enumerate(section):
-                    section[i] = int(section[i], 16)
-                if section:
-
-                    # Inside the section, break up into all firings and other data
-                    azimuth_hex = section[2:4]  # Get the first two hexidecimal numbers representing the azimuth
-                    azimuth_hex_reversed = azimuth_hex[::-1]  # Reverse the order of the hexidecimal numbers
-                    azimuth_decimal = (azimuth_hex_reversed[0] << 8) | azimuth_hex_reversed[1]
-                    azimuth = azimuth_decimal / 100  # Scale the azimuth
-                    print("azimuth_hex: ", azimuth_hex, ", , azimuth: ", azimuth)
-                    
-            
-            if eth.type != dpkt.ethernet.ETH_TYPE_IP:
-                continue
-
-            ip = eth.data
-            ipcounter += 1
-
-            if ip.p == dpkt.ip.IP_PROTO_TCP:
-                tcpcounter += 1
-
-            if ip.p == dpkt.ip.IP_PROTO_UDP:
-                udpcounter += 1
-
-    print("Total number of packets in the pcap file:", counter)
-    print("Total number of ip packets:", ipcounter)
-    print("Total number of tcp packets:", tcpcounter)
-    print("Total number of udp packets:", udpcounter)
+import numpy as np
+import plotly.graph_objects as go
+from dash import Dash, dcc, html, Input, Output
+import plotly.express as px
+import pandas as pd
 
 
-def main():
-    # Parse command line arguments
-    parser = argparse.ArgumentParser(description='PCAP file parser')
-    parser.add_argument('file_path', type=str, help='Path to the .pcap file')
-    args = parser.parse_args()
+points = pd.read_csv("data/points.csv")
+# add a column of all ones
+points["size_column"] = 3
 
-    # Call the function to load and parse the pcap file
-    parse_pcap_file(args.file_path)
+print("Got points")
 
-if __name__ == '__main__':
-    main()
+app = Dash(__name__)
+
+app.layout = html.Div([
+    html.H1('Custom Dash(board) for Parsed LiDAR Ethernet Packets'),
+    dcc.Graph(id="graph", style={'width': '100vw', 'height': '100vh'}),
+    dcc.Interval(
+        id='timer',
+        interval=100, # in milliseconds
+        n_intervals=0
+    )
+])
+
+print("Got points2")
+
+@app.callback(
+    Output("graph", "figure"), 
+    Input("timer", "n_intervals"))
+def update_bar_chart(n):
+    plot_max = n * 15000
+    plot_min = plot_max - 15000
+    # plot_points = points[plot_min:plot_max]
+    # extract rows from df according to plot_min and plot_max
+    plot_points = points.iloc[plot_min:plot_max]
+
+    fig = px.scatter_3d(
+                    data_frame=plot_points,
+                    x="x",
+                    y="y",
+                    z="z",
+    ).update_traces(marker=dict(color='red', size=plot_points['size_column']), line=dict(width=0, color='rgba(0,0,0,0)'))
+    
+    # Set the camera angle
+    camera_angle = (90 + n) % 360 # Change this value to adjust the rotation speed
+    radius = 1
+    fig.update_layout(scene_camera=dict(
+                        eye=dict(x= radius* np.cos(np.radians(camera_angle)), y=radius * np.sin(np.radians(camera_angle)), z=radius),  # Zoomed in more
+                        # up=dict(x=0, y=1, z=0),
+                        center=dict(x=0, y=0, z=0),
+                        ))
+    
+    return fig
+
+print("Running server")
+app.run_server(debug=True)

@@ -4,3 +4,4 @@ log/
 velodyne/
 
 ros2_ws/src/ros_tutorials/
+data/points.csv
