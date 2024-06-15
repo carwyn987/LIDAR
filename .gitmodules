@@ -1,5 +1,5 @@
-[submodule "ros2_ws/ros2_ws/src/ROS2_Point_Cloud_Demo"]
-	path = ros2_ws/ros2_ws/src/ROS2_Point_Cloud_Demo
+[submodule "ros2_ws/src/ROS2_Point_Cloud_Demo"]
+	path = ros2_ws/src/ROS2_Point_Cloud_Demo
 	url = git@github.com:SebastianGrans/ROS2-Point-Cloud-Demo.git
 [submodule "ros2_ws/src/ROS2_Point_Cloud_Demo"]
 	path = ros2_ws/src/ROS2_Point_Cloud_Demo
